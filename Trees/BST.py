@@ -219,16 +219,16 @@ class BST(BinaryTree):
     
     @staticmethod
     def _remove(node, value):
-        if not node:
+        if node is None:
             return node
         elif node.value > value:
             node.left = BST._remove(node.left,value)
         elif node.value < value:
             node.right = BST._remove(node.right, value)
         else:
-            if not node.right:
+            if node.right is None:
                 return node.left
-            elif not node.left:
+            elif node.left is None:
                 return node.right
             arg = node.right
             while arg.left:
