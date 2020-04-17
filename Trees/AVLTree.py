@@ -87,7 +87,12 @@ class AVLTree(BST):
         The textbook's class hierarchy for their AVL tree code is fairly different from our class hierarchy,
         however, so you will have to adapt their code.
         '''
-
+        if node is None or node.left is None:
+            return node
+        newRoot = Node(node.left.value)
+        node.left = newRoot.right
+        newRoot.right = node
+        return node
 
     def insert(self, value):
         '''
