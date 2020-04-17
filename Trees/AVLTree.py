@@ -109,3 +109,27 @@ class AVLTree(BST):
         The code should look very similar to the code for your insert function for the BST,
         but it will also call the left and right rebalancing functions.
         '''
+    
+    @staticmethod
+    def rebalance(node):
+        if AVLTree._balance_factor(node) < 0:
+            if AVLTree._balance_factor(node) > 0:
+                node.right = AVLTree._right_rotate(node.right)
+            
+    
+    @staticmethod
+    def _insert(self, node):
+        if value < node.value:
+            if node.left is None:
+                node.left = Node(value)
+            else:
+                BST._insert(value, node.left)
+        elif value > node.value:
+            if node.right is None:
+                node.right = Node(value)
+            else:
+                BST._insert(value, node.right)
+        else:
+            print('value is already in tree')
+
+
