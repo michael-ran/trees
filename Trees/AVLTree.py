@@ -6,7 +6,7 @@ The functions in this file are considerably harder than the functions in the Bin
 from Trees.BinaryTree import BinaryTree, Node
 from Trees.BST import BST
 
-class AVLTree():
+class AVLTree(BST):
     '''
     FIXME:
     AVLTree is currently not a subclass of BST.
@@ -19,7 +19,9 @@ class AVLTree():
         FIXME:
         Implement this function.
         '''
-
+        super().__init__()
+        if xs:
+            self.insert_list(xs)
 
     def balance_factor(self):
         '''
@@ -49,7 +51,11 @@ class AVLTree():
         FIXME:
         Implement this function.
         '''
-
+        correct = [-1, 0, 1]
+        if node is None:
+            return True
+        else:
+            return AVLTree._is_avl_satisfied(node.right) and AVLTree._is_avl_satisfied(node.left) and AVLTree._balance_factor(node) in correct
 
     @staticmethod
     def _left_rotate(node):
@@ -62,7 +68,13 @@ class AVLTree():
         The textbook's class hierarchy for their AVL tree code is fairly different from our class hierarchy,
         however, so you will have to adapt their code.
         '''
+        if node is None or node.right is None:
+            return node
 
+        newRoot = Node(node.right.value)
+        node.right = newRoot.left
+        newRoot.left = node
+        return node
 
     @staticmethod
     def _right_rotate(node):
