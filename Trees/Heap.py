@@ -3,7 +3,7 @@
 
 from Trees.BinaryTree import BinaryTree, Node
 
-class Heap():
+class Heap(BinaryTree):
     '''
     FIXME:
     Heap is currently not a subclass of BinaryTree.
@@ -17,7 +17,10 @@ class Heap():
         If xs is a list (i.e. xs is not None),
         then each element of xs needs to be inserted into the Heap.
         '''
-
+        super().__init__()
+        if xs:
+            for val in xs:
+                self.insert(val)
 
     def __repr__(self):
         '''
@@ -56,7 +59,20 @@ class Heap():
         The lecture videos have the exact code you need,
         except that their method is an instance method when it should have been a static method.
         '''
+        left_condition = True
+        right_condition = True
 
+        if node is None:
+            return True
+        if node.left:
+            left_condition = node.left.value >= node.value and Heap._is_heap_satisfied(node.left)
+        if node.right:
+            right_condition = node.right.value >= node.value and Heap._is_heap_satisfied(node.right)
+
+        if left_condition == True and right_condition == True:
+            return True
+        else:
+            return False
 
     def insert(self, value):
         '''
@@ -75,7 +91,28 @@ class Heap():
         FIXME:
         Implement this function.
         '''
+        if node.left is None:
+            node.left = Node(value)
+        elif node.right is None:
+            node.right = Node(value)
+        else:
+            left_count = Heap.elem_count(node.left)
+            right_count = Heap.elem_count(node.right)
+            if left_count <= right_count:
+                
+            
 
+
+    @staticmethod
+    def elem_count(node):
+        if node is None:
+            return 0
+        size = 1
+        if node.right:
+            size = size + 1 + elem_count(node.right)
+        if node.left:
+            size = size + 1 + elem_count(node.left)
+        return size
 
     def insert_list(self, xs):
         '''
