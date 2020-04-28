@@ -141,3 +141,32 @@ class Heap(BinaryTree):
         FIXME:
         Implement this function.
         '''
+
+
+    @staticmethod 
+    def find_last(node):
+        binary = "{0:b}".format(node.descendents)
+
+        if len(binary) == 2:
+            if binary == '1':
+                temp = node.right
+                node.right = None
+                node.descendents -= 1
+            elif binary == '0':
+                temp = node.left
+                node.left = None
+                node.descendents -= 1
+        else:
+            if binary[1] == '0':
+                Heap.find_last(node.left)
+            elif binary[1] == '1':
+                Heap.find_last(node.right)
+        
+        return temp
+
+
+
+    @staticmethod
+    def swap(node, value):
+        
+        
