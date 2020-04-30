@@ -132,47 +132,55 @@ class Heap(BinaryTree):
         '''
         if Heap.is_heap_satisfied(self):
             return self.root.value
-
     def remove_min(self):
-        '''
-        Removes the minimum value from the Heap. 
-        If the heap is empty, it does nothing.
+       # temp = Heap.find_last(self.root)
+       # self.root = temp
+       # nod = Heap.swap(self.root)
+       # return nod
+       pass
+'''  
+    @staticmethod 
+    def find_last(node):
+        binary = "{0:b}".format(node.descendents)
 
-        FIXME:
-        Implement this function.
-        '''
-        pass
-    
-#    @staticmethod 
-#    def find_last(node):
-#        binary = "{0:b}".format(node.descendents)
-#
-#        if len(binary) == 2:
-#            if binary == '1':
-#                temp = node.right
-#                node.right = None
-#                node.descendents -= 1
-#            elif binary == '0':
-#                temp = node.left
-#                node.left = None
-#                node.descendents -= 1
-#        else:
-#            if binary[1] == '0':
-#                Heap.find_last(node.left)
-#            elif binary[1] == '1':
-#                Heap.find_last(node.right)
-#        
-#        return temp.value
-#
-#
-#
-#    @staticmethod
-#    def swap(node):
-#        if node.root > node.left:
-#            node.root, node.left = node.left, node.root
-#            Heap.swap(node.left)
-#        elif node.root > node.right:
-#            node.root, node.right = node.root, node.left
-#            Heap.swap(node.right)
-#        else:
-#            return node
+        if len(binary) == 2:
+            if binary[0] == '1':
+                if binary[1] == '1':
+                    temp = node.right
+                    node.right = None
+                    node.descendents -= 1
+                elif binary[1] == '0':
+                    temp = node.left
+                    node.left = None
+                    node.descendents -= 1
+            elif binary[0] == '0':
+                if binary[1] == '1':
+                    temp = node.right
+                    node.right = None
+                    node.descendents -= 1
+                elif binary[1] == '0':
+                    temp = node.left
+                    node.left = None
+                    node.descendents -= 1
+
+        else:
+            if binary[1] == '0':
+                Heap.find_last(node.left)
+            elif binary[1] == '1':
+                Heap.find_last(node.right)
+        
+        return temp.value
+
+
+
+    @staticmethod
+    def swap(node):
+        if node.root > node.left:
+            node.root, node.left = node.left, node.root
+            Heap.swap(node.left)
+        elif node.root > node.right:
+            node.root, node.right = node.root, node.left
+            Heap.swap(node.right)
+        else:
+            return node
+'''
